@@ -1,0 +1,23 @@
+﻿@addTagHelper *, BlazorDevExtreme
+@using BlazorDevExtreme
+@using BlazorDevExtreme.Components
+
+@page "/"
+
+<h1>Hello, DevExtreme within Blazor!</h1>
+
+<label>Clicked count:</label>
+<div>@ClickedCount</div>
+
+<DxButton Text=@ButtonText Click=@((Action)DxButton_Click) OnClickEnabled="true" />
+
+@functions {
+    public int ClickedCount { get; set; } = 0;
+    void DxButton_Click()
+    {
+        ClickedCount++;
+        StateHasChanged();
+        DevExpress.UiInterop.Notify($"Clicked {ClickedCount}!", "info", 5000); // displays a notification using a static method
+    }
+    string ButtonText => $"Was clicked {ClickedCount} times";
+}
